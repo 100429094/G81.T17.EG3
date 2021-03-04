@@ -8,7 +8,7 @@ class AccessKey():
     def __init__(self, dni, access_code, notification_emails, validity):
         self.__alg = "SHA-256"
         self.__type = "DS"
-        self.__dni = dni
+        self.__id_document = dni
         self.__access_code = access_code
         self.__notification_emails = notification_emails
         justnow = datetime.utcnow()
@@ -25,12 +25,13 @@ class AccessKey():
         return "{alg:"+self.__alg+",typ:"+self.__type+",accesscode:"+self.__access_code+",issuedate:"+self.__issued_at+",expirationdate:"+self.__expiration_date+"}"
 
     @property
-    def dni(self):
+    def id_document( self ):
         """Property that represents the dni of the visitor"""
-        return self.dni
-    @dni.setter
-    def dni(self,value):
-        self.__dni = value
+        return self.__id_document
+
+    @id_document.setter
+    def id_document( self, value ):
+        self.__id_document = value
 
     @property
     def access_code(self):
@@ -46,10 +47,18 @@ class AccessKey():
         return self.__notification_emails
 
     @notification_emails.setter
-    def notification_emails( self, value ):
+    def notification_emails(self, value ):
         self.__notification_emails = value
 
     @property
     def key(self):
         """Returns the sha256 signature"""
         return hashlib.sha256(self.__signature_string().encode()).hexdigest()
+
+    @property
+    def issued_at(self):
+        return self.__issued_at
+
+    @issued_at.setter
+    def issued_at( self, value ):
+        self.__issued_at = value
