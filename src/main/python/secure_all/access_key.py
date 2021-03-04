@@ -57,6 +57,7 @@ class AccessKey():
 
     @property
     def issued_at(self):
+        """Returns the issued at value"""
         return self.__issued_at
 
     @issued_at.setter
