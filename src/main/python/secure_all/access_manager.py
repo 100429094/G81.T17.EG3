@@ -9,3 +9,7 @@ class AccessManager:
     def validate_dni(dni):
         """RETURN TRUE IF THE DNI IS RIGHT, OR FALSE IN OTHER CASE"""
         return True
+
+    def request_access_code(self, id_document, access_type, full_name, days):
+        pass
+
