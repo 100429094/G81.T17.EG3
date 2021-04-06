@@ -30,6 +30,10 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             ar = AccessRequest(id_document="123456789", full_name="Beatriz Benitez", access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
 
+    def test_AM_FR_01_I1_2_letras(self):
+        with self.assertRaises(AccessManagementException) as AME:
+            ar = AccessRequest(id_document="1234567AA", full_name="Beatriz Benitez", access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
+
     """
     def test_something( self ):
         #print("La ruta es: " + RUTA_FICHERO) #Imprimir la ruta actual a utilizar

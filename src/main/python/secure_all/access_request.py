@@ -62,6 +62,9 @@ class AccessRequest:
         if value.isdigit():
             from secure_all import AccessManagementException
             raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+        if value[-2:-1].isalpha():
+            from secure_all import AccessManagementException
+            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
         self.__id_document = value
 
     @property
