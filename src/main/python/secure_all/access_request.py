@@ -2,12 +2,15 @@
 import hashlib
 import json
 from datetime import datetime
+
+
 '''Hacer el árbol de derivacion y comprobaciones necesarias para cada str pasado'''
+
 
 class AccessRequest:
     """Class representing the access request"""
-    def __init__(self, id_document, full_name, access_type, email_address, validity ):
-        self.__id_document = id_document
+    def __init__(self, id_document, full_name, access_type, email_address, validity):
+        self.id_document = id_document
         self.__full_name = full_name
         self.__visitor_type = access_type
         self.__email_address = email_address
@@ -19,13 +22,13 @@ class AccessRequest:
         return "AccessRequest:" + json.dumps(self.__dict__)
 
     @property
-    def full_name(self ):
+    def full_name(self):
         """Property representing the name and the surname of
         the person who request access to the building"""
         return self.__full_name
 
     @full_name.setter
-    def full_name(self, value ):
+    def full_name(self, value):
         self.__full_name = value
 
     @property
@@ -47,12 +50,15 @@ class AccessRequest:
         self.__email_address = value
 
     @property
-    def id_document( self ):
+    def id_document(self):
         """Property representing the requester's DNI"""
         return self.__id_document
 
     @id_document.setter
-    def id_document( self, value ):
+    def id_document(self, value):
+        if len(value)<9:
+            from secure_all import AccessManagementException
+            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
         self.__id_document = value
 
     @property
