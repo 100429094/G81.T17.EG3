@@ -56,7 +56,7 @@ class AccessRequest:
 
     @id_document.setter
     def id_document(self, value):
-        if len(value)<9:
+        if len(value)!=9:
             from secure_all import AccessManagementException
             raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
         self.__id_document = value
