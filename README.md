@@ -1,9 +1,9 @@
 # Guided Exercise 3
 
-TXX.GYY.GE3
+T17.G81.GE3
 
 Authors:
 
-<author 1>, <email author 1>, user name in github
+Beatriz, 100429094@alumnos.uc3m.es, 100429094
 
-<author 2>, <email author 2>, user name in github
+Miguel, 100432505@alumnos.uc3m.es, miguelsantana

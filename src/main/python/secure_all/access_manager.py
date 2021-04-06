@@ -1,4 +1,6 @@
-"""Module """
+"""Module 3"""
+#Añadir los import necesarios para init:
+#from .access_management_exception con el punto para que coja el resto de imports para test_request_access
 
 class AccessManager:
     """Class for providing the methods for managing the access to a building"""
@@ -12,4 +14,5 @@ class AccessManager:
 
     def request_access_code(self, id_document, access_type, full_name, days):
         pass
+
 

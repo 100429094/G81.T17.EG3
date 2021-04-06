@@ -22,7 +22,7 @@ class AccessKey():
 
     def __signature_string(self):
         """Composes the string to be used for generating the key"""
-        return "{alg:"+self.__alg+",typ:"+self.__type+",accesscode:"+self.__access_code+",issuedate:"+self.__issued_at+",expirationdate:"+self.__expiration_date+"}"
+        return "{alg:"+self.__alg+",typ:"+self.__type+",accesscode:"+self.__access_code+",issuedate:"+str(self.__issued_at)+",expirationdate:"+str(self.__expiration_date)+"}"
 
     @property
     def id_document( self ):
@@ -56,7 +56,7 @@ class AccessKey():
         return hashlib.sha256(self.__signature_string().encode()).hexdigest()
 
     @property
-    def issued_at(self):
+    def issued_at(self): #Convertir issue_at y expiration_date a str
         """Returns the issued at value"""
         return self.__issued_at
 
