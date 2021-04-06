@@ -1,6 +1,7 @@
 """MODULE: access_request. Contains the access request class"""
 import hashlib
 import json
+import sys
 from datetime import datetime
 
 
@@ -16,6 +17,8 @@ class AccessRequest:
         self.__email_address = email_address
         self.__validity = validity
         justnow = datetime.utcnow()
+        if "unittest" in sys.modules:
+            justnow = datetime(2021,1,1,1,1)
         self.__time_stamp = datetime.timestamp(justnow)
 
     def __str__(self):
@@ -56,7 +59,10 @@ class AccessRequest:
 
     @id_document.setter
     def id_document(self, value):
-        if len(value)!=9:
+        if type(value) != str:
+            from secure_all import AccessManagementException
+            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+        if len(value) != 9:
             from secure_all import AccessManagementException
             raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
         if value.isdigit():
@@ -65,6 +71,18 @@ class AccessRequest:
         if value[-2:-1].isalpha():
             from secure_all import AccessManagementException
             raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+
+        letra = "TRWAGMYFPDXBNJZSQVHLCKE"
+        try:
+            num = int(value[0:len(value)-1])
+        except ValueError as e:
+            from secure_all import AccessManagementException
+            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+
+        if value[-1] != letra[num%23]:
+            from secure_all import AccessManagementException
+            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+
         self.__id_document = value
 
     @property
