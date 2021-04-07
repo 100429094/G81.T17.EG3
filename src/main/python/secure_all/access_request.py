@@ -2,6 +2,7 @@
 import hashlib
 import json
 import sys
+import re
 from datetime import datetime
 
 
@@ -10,15 +11,23 @@ from datetime import datetime
 
 class AccessRequest:
     """Class representing the access request"""
+
+    MENSAJE_EXCEPCION_DNI = "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido"
+    MENSAJE_EXCEPCION_ACCESS_TYPE = "EXCEPTION: El tipo de acceso solicitado no es valido"
+    MENSAJE_EXCEPCION_NAME = "EXCEPTION: La cadena de nombre y apellido no es válida"
+    MENSAJE_EXCEPCION_EMAIL = "EXCEPTION: El formato de correo electrónico no es válido"
+    MENSAJE_EXCEPCION_VALIDITY = "EXCEPTION: El número de días no tiene un valor válido"
+    MENSAJE_EXCEPCION_OTHER = "EXCEPTION: Otros errores internos"
+
     def __init__(self, id_document, full_name, access_type, email_address, validity):
         self.id_document = id_document
-        self.__full_name = full_name
-        self.__visitor_type = access_type
-        self.__email_address = email_address
-        self.__validity = validity
+        self.full_name = full_name
+        self.visitor_type = access_type
+        self.email_address = email_address
+        self.validity = validity
         justnow = datetime.utcnow()
         if "unittest" in sys.modules:
-            justnow = datetime(2021,1,1,1,1)
+            justnow = datetime(2021, 1, 1, 1, 1)
         self.__time_stamp = datetime.timestamp(justnow)
 
     def __str__(self):
@@ -32,6 +41,14 @@ class AccessRequest:
 
     @full_name.setter
     def full_name(self, value):
+        exp_reg = "^[A-Za-z]+(\s[A-Za-z]+){1,2}$"
+
+        resultado = re.match(exp_reg, value)
+
+        if not resultado:
+            from secure_all import AccessManagementException
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_NAME}")
+
         self.__full_name = value
 
     @property
@@ -41,6 +58,9 @@ class AccessRequest:
 
     @visitor_type.setter
     def visitor_type(self, value):
+        if value != "Guest" and value != "Resident":
+            from secure_all import AccessManagementException
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_ACCESS_TYPE}")
         self.__visitor_type = value
 
     @property
@@ -61,16 +81,16 @@ class AccessRequest:
     def id_document(self, value):
         if type(value) != str:
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if len(value) != 9:
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if value.isdigit():
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if value[-2:-1].isalpha():
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         letra = "TRWAGMYFPDXBNJZSQVHLCKE"
         try:
