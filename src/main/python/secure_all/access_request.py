@@ -6,12 +6,8 @@ import re
 from datetime import datetime
 
 
-'''Hacer el árbol de derivacion y comprobaciones necesarias para cada str pasado'''
-
-
 class AccessRequest:
     """Class representing the access request"""
-
     MENSAJE_EXCEPCION_DNI = "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido"
     MENSAJE_EXCEPCION_ACCESS_TYPE = "EXCEPTION: El tipo de acceso solicitado no es valido"
     MENSAJE_EXCEPCION_NAME = "EXCEPTION: La cadena de nombre y apellido no es válida"
@@ -41,9 +37,8 @@ class AccessRequest:
 
     @full_name.setter
     def full_name(self, value):
-        exp_reg = "^[A-Za-z]+(\s[A-Za-z]+){1,2}$"
-
-        resultado = re.match(exp_reg, value)
+        exp_reg_name = "^[A-ZÁÉÍÓÚa-záéíóú]+(\s[A-ZÁÉÍÓÚa-záéíóú]+){1,2}$"
+        resultado = re.match(exp_reg_name, value)
 
         if not resultado:
             from secure_all import AccessManagementException
@@ -64,12 +59,37 @@ class AccessRequest:
         self.__visitor_type = value
 
     @property
+    def validity(self):
+        """Property representing the validity of visitor"""
+        return self.__validity
+
+    @validity.setter
+    def validity(self, value):
+        if self.__visitor_type == "Guest":
+            if value<2 or value>15:
+                from secure_all import AccessManagementException
+                raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_VALIDITY}")
+        if self.__visitor_type == "Resident":
+            if value != 0:
+                from secure_all import AccessManagementException
+                raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_VALIDITY}")
+        self.__validity = value
+
+    @property
     def email_address(self):
         """Property representing the requester's email address"""
         return self.__email_address
 
     @email_address.setter
     def email_address(self, value):
+        # 100429094@alumnos.uc3m.es
+        exp_reg_email = "[A-Za-z0-9]+\@([A-Za-z0-9]+\.){1,2}[A-Za-z]+"
+        resultado = re.match(exp_reg_email, value)
+
+        if not resultado:
+            from secure_all import AccessManagementException
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_EMAIL}")
+
         self.__email_address = value
 
     @property
@@ -97,11 +117,11 @@ class AccessRequest:
             num = int(value[0:len(value)-1])
         except ValueError as e:
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         if value[-1] != letra[num%23]:
             from secure_all import AccessManagementException
-            raise AccessManagementException("EXCEPTION: id_card debe tener 9 caracteres")
+            raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         self.__id_document = value
 
@@ -113,5 +133,4 @@ class AccessRequest:
     @property
     def access_code(self):
         """Returns the md5 signature"""
-        #Validar la lista de valores pasados
         return hashlib.md5(self.__str__().encode()).hexdigest()
