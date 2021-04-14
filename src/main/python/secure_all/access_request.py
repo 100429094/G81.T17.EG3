@@ -4,6 +4,7 @@ import json
 import sys
 import re
 from datetime import datetime
+from .access_management_exception import AccessManagementException
 
 
 class AccessRequest:
@@ -41,7 +42,6 @@ class AccessRequest:
         resultado = re.match(exp_reg_name, value)
 
         if not resultado:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_NAME}")
 
         self.__full_name = value
@@ -54,7 +54,6 @@ class AccessRequest:
     @visitor_type.setter
     def visitor_type(self, value):
         if value != "Guest" and value != "Resident":
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_ACCESS_TYPE}")
         self.__visitor_type = value
 
@@ -67,11 +66,9 @@ class AccessRequest:
     def validity(self, value):
         if self.__visitor_type == "Guest":
             if value<2 or value>15:
-                from secure_all import AccessManagementException
                 raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_VALIDITY}")
         if self.__visitor_type == "Resident":
             if value != 0:
-                from secure_all import AccessManagementException
                 raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_VALIDITY}")
         self.__validity = value
 
@@ -87,7 +84,6 @@ class AccessRequest:
         resultado = re.match(exp_reg_email, value)
 
         if not resultado:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_EMAIL}")
 
         self.__email_address = value
@@ -100,27 +96,21 @@ class AccessRequest:
     @id_document.setter
     def id_document(self, value):
         if type(value) != str:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if len(value) != 9:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if value.isdigit():
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
         if value[-2:-1].isalpha():
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         letra = "TRWAGMYFPDXBNJZSQVHLCKE"
         try:
             num = int(value[0:len(value)-1])
         except ValueError as e:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         if value[-1] != letra[num%23]:
-            from secure_all import AccessManagementException
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         self.__id_document = value
