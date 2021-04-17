@@ -12,13 +12,13 @@ class AccessKey:
     def __init__(self, dni, access_code, notification_emails, validity):
         self.__alg = "SHA-256"
         self.__type = "DS"
-        self.__id_document = dni
-        self.__access_code = access_code
-        self.__notification_emails = notification_emails
+        self.id_document = dni
+        self.access_code = access_code
+        self.notification_emails = notification_emails
         justnow = datetime.utcnow()
         if "unittest" in sys.modules:
             justnow = datetime(2021, 1, 1, 1, 1)
-        self.__issued_at = datetime.timestamp(justnow)
+        self.issued_at = datetime.timestamp(justnow)
         if validity == 0:
             self.__expiration_date = 0
         else:
@@ -80,7 +80,7 @@ class AccessKey:
         if len(value) > 5 or len(value) <= 0:
             raise AccessManagementException("EXCEPCION : Numero incorrecto de correos electronicos")
         for correo in value:
-            exp_reg_email = r"[A-Za-z0-9]+\@([A-Za-z0-9]+\.){1,2}[A-Za-z]+"
+            exp_reg_email = r"[A-Za-z0-9]+\@([A-Za-z0-9]+\.){1,2}[A-Za-z]+$"
             resultado = re.match(exp_reg_email, correo)
 
             if not resultado:
@@ -94,7 +94,7 @@ class AccessKey:
         return hashlib.sha256(self.__signature_string().encode()).hexdigest()
 
     @property
-    def issued_at(self): #Convertir issue_at y expiration_date a str
+    def issued_at(self):  # Convertir issue_at y expiration_date a str
         """Returns the issued at value"""
         return self.__issued_at
 

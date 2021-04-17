@@ -69,10 +69,8 @@ class TestAccessRequest(TestCase):
         self.assertEqual(ar.access_code, "299350376deadf07044aaa5035f93a6f")
 
     def test_AM_FR_01_I3_nombres_apellido(self):
-        with self.assertRaises(AccessManagementException) as AME:
-            AccessRequest(id_document="12345678Z", full_name="Beatriz x Benitez",
-                          access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        ar = AccessRequest(id_document="12345678Z", full_name="Beatriz x Benitez",
+                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
 
     def test_AM_FR_01_I3_solo_nombre(self):
         with self.assertRaises(AccessManagementException) as AME:

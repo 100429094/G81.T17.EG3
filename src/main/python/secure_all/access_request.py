@@ -65,7 +65,7 @@ class AccessRequest:
     @validity.setter
     def validity(self, value):
         if self.__visitor_type == "Guest":
-            if value<2 or value>15:
+            if value < 2 or value > 15:
                 raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_VALIDITY}")
         if self.__visitor_type == "Resident":
             if value != 0:
@@ -80,7 +80,7 @@ class AccessRequest:
     @email_address.setter
     def email_address(self, value):
         # 100429094@alumnos.uc3m.es
-        exp_reg_email = "[A-Za-z0-9]+\@([A-Za-z0-9]+\.){1,2}[A-Za-z]+"
+        exp_reg_email = "[A-Za-z0-9]+\@([A-Za-z0-9]+\.){1,2}[A-Za-z]+$"
         resultado = re.match(exp_reg_email, value)
 
         if not resultado:
@@ -110,7 +110,7 @@ class AccessRequest:
         except ValueError as e:
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
-        if value[-1] != letra[num%23]:
+        if value[-1] != letra[num % 23]:
             raise AccessManagementException(f"{self.MENSAJE_EXCEPCION_DNI}")
 
         self.__id_document = value
