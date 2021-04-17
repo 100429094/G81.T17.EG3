@@ -1,6 +1,5 @@
 """Module 3"""
 #Añadir los import necesarios para init:
-import
 from .access_management_exception import AccessManagementException
 from .access_key import AccessKey
 from pathlib import Path
@@ -35,17 +34,51 @@ class AccessManager:
         access_code = data["AccessCode"]
         notification_emails = data["NotificationMail"]
         value = AccessKey(dni, access_code, notification_emails, 2)
+        self.save_to_storage_key(value.key)
+
 
         return value.key
+
+    def save_to_storage_request(self, value):
+
+        my_file: str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageRequest.json"
+        try:
+            with open(my_file, "x",encoding="utf-8", newline="") as file:
+                data = [self.__dict__]
+                json.dump(data, file, indent="2")
+        except FileExistsError as ex:
+            list_data = self.read_file(my_file)
+
+            for k in list_data:
+                if k["_AccessRequest__id_document"] == value:
+                    raise AccessManagementException("DNI encontrado en storageRequest")
+            list_data.append(self.__dict__)
+            with open(my_file, "w", encoding="utf-8", newline="") as file:
+                json.dump(list_data, file, indent="2")
+
+    def save_to_storage_key(self, value):
+        my_file = str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageKey.json"
+        try:
+            with open(my_file, "x", encoding="utf-8", newline="") as file:
+                data = [self.__dict__]
+                json.dump(data, file, indent="2")
+        except FileExistsError as ex:
+            list_data = self.read_file(my_file)
+
+            for k in list_data:
+                if k["_AccessRequest__id_document"] == value:
+                    raise AccessManagementException("Clave encontrada en storageRequest")
+            list_data.append(self.__dict__)
+            with open(my_file, "w", encoding="utf-8", newline="") as file:
+                json.dump(list_data, file, indent="2")
 
     def get_open_door(self, key):
 
         self.check_key(key)
 
         my_file = str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/main/python/secure_all/access_manager.py"
-        list_key = self.read_key_file(my_file)
+        list_key = self.read_file(my_file)
 
-        justnow = datetime.utcnow()
         justnow_timestap = datetime.timestamp()
 
         for k in list_key:
@@ -62,9 +95,9 @@ class AccessManager:
         else:
             raise AccessManagementException("Clave invalida")
 
-    def read_key_file(self, file):
+    def read_file(self, my_file):
         try:
-            with open(file, "r", encoding="utf-8", newline="")
+            with open(my_file, "r", encoding="utf-8", newline="")as file:
                 data = json.load(file)
         except FileNotFoundError as ex:
             raise AccessManagementException("Archivo incorrecto")
