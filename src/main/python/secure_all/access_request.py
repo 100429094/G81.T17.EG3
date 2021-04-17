@@ -1,8 +1,10 @@
 """MODULE: access_request. Contains the access request class"""
 import hashlib
 import json
+import os
 import sys
 import re
+from pathlib import Path
 from datetime import datetime
 from .access_management_exception import AccessManagementException
 
@@ -26,6 +28,22 @@ class AccessRequest:
         if "unittest" in sys.modules:
             justnow = datetime(2021, 1, 1, 1, 1)
         self.__time_stamp = datetime.timestamp(justnow)
+        self.save_to_storage_key()
+
+    def save_to_storage_key(self):
+        cwd = str(Path.cwd()) + "/../../../JsonFilesRequests/"
+        my_file = cwd + self.id_document + ".json"
+        pfile = Path(my_file)
+        if os.path.exists(my_file):
+            os.remove(my_file)
+        with open(my_file, "x", encoding="utf-8", newline="") as file:
+            data = []
+            data.append({"AccessCode": self.access_code,
+                        "DNI": self.id_document,
+                        "NotificationMail": self.email_address}
+                        )
+            json.dump(data, file, indent=2)
+
 
     def __str__(self):
         return "AccessRequest:" + json.dumps(self.__dict__)
