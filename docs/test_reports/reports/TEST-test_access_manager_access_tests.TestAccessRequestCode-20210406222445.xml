@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_access_manager_access_tests.TestAccessRequestCode-20210406222445" tests="1" file="test_access_manager_access_tests.py" time="0.028" timestamp="2021-04-06T22:24:45" failures="0" errors="1" skipped="0">
+	<testcase classname="test_access_manager_access_tests.TestAccessRequestCode" name="test_request_access_code_dni_ok" time="0.028" timestamp="2021-04-06T22:24:45">
+		<error type="TypeError" message="request_access_code() takes 5 positional arguments but 6 were given"><![CDATA[Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_access_manager_access_tests.py", line 12, in test_request_access_code_dni_ok
+    res = am.request_access_code("12345678Z", "GUEST", "JOSE LOPEZ", "jllopez@inf.uc3m.es", 3)
+TypeError: request_access_code() takes 5 positional arguments but 6 were given
+]]></error>
+	</testcase>
+</testsuite>

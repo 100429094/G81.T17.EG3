@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_access_manager_access_tests.TestAccessRequestCode-20210406233542" tests="1" file="test_access_manager_access_tests.py" time="0.001" timestamp="2021-04-06T23:35:42" failures="0" errors="0" skipped="0">
+	<testcase classname="test_access_manager_access_tests.TestAccessRequestCode" name="test_request_access_code_dni_ok" time="0.001" timestamp="2021-04-06T23:35:42"/>
+</testsuite>

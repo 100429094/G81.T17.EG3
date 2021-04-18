@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="unittest.loader._FailedTest-20210406231734" tests="2" file="unittest/loader.py" time="0.004" timestamp="2021-04-06T23:17:35" failures="0" errors="2" skipped="0">
+	<testcase classname="unittest.loader._FailedTest" name="test_access_manager_access_tests" time="0.003" timestamp="2021-04-06T23:17:35">
+		<error type="ImportError" message="Failed to import test module: test_access_manager_access_tests
+Traceback (most recent call last):
+  File &quot;C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py&quot;, line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_access_manager_access_tests.py&quot;, line 2, in &lt;module&gt;
+    from secure_all import AccessManager
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py&quot;, line 3, in &lt;module&gt;
+    from .access_request import AccessRequest
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\access_request.py&quot;, line 6, in &lt;module&gt;
+    from secure_all import AccessManagementException
+ImportError: cannot import name 'AccessManagementException' from partially initialized module 'secure_all' (most likely due to a circular import) (c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py)
+"><![CDATA[Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py", line 34, in testFailure
+    raise self._exception
+ImportError: Failed to import test module: test_access_manager_access_tests
+Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_access_manager_access_tests.py", line 2, in <module>
+    from secure_all import AccessManager
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py", line 3, in <module>
+    from .access_request import AccessRequest
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\access_request.py", line 6, in <module>
+    from secure_all import AccessManagementException
+ImportError: cannot import name 'AccessManagementException' from partially initialized module 'secure_all' (most likely due to a circular import) (c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py)
+
+]]></error>
+	</testcase>
+	<testcase classname="unittest.loader._FailedTest" name="test_request_access_code_tests" time="0.001" timestamp="2021-04-06T23:17:35">
+		<error type="ImportError" message="Failed to import test module: test_request_access_code_tests
+Traceback (most recent call last):
+  File &quot;C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py&quot;, line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_request_access_code_tests.py&quot;, line 3, in &lt;module&gt;
+    from secure_all import AccessRequest, AccessManagementException
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py&quot;, line 3, in &lt;module&gt;
+    from .access_request import AccessRequest
+  File &quot;c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\access_request.py&quot;, line 6, in &lt;module&gt;
+    from secure_all import AccessManagementException
+ImportError: cannot import name 'AccessManagementException' from partially initialized module 'secure_all' (most likely due to a circular import) (c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py)
+"><![CDATA[Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py", line 34, in testFailure
+    raise self._exception
+ImportError: Failed to import test module: test_request_access_code_tests
+Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_request_access_code_tests.py", line 3, in <module>
+    from secure_all import AccessRequest, AccessManagementException
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py", line 3, in <module>
+    from .access_request import AccessRequest
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\access_request.py", line 6, in <module>
+    from secure_all import AccessManagementException
+ImportError: cannot import name 'AccessManagementException' from partially initialized module 'secure_all' (most likely due to a circular import) (c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\main\python\secure_all\__init__.py)
+
+]]></error>
+	</testcase>
+</testsuite>

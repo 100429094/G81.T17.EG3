@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_request_access_code_tests.MyTestCase-20210406225624" tests="3" file="test_request_access_code_tests.py" time="0.003" timestamp="2021-04-06T22:56:24" failures="0" errors="1" skipped="0">
+	<testcase classname="test_request_access_code_tests.MyTestCase" name="test_AM_FR_01_I1_dni_valido" time="0.001" timestamp="2021-04-06T22:56:24"/>
+	<testcase classname="test_request_access_code_tests.MyTestCase" name="test_something" time="0.000" timestamp="2021-04-06T22:56:24"/>
+	<testcase classname="test_request_access_code_tests.MyTestCase" name="test_AM_FR_01_I1_8_caracteres" time="0.002" timestamp="2021-04-06T22:56:24">
+		<error type="NameError" message="name 'AccessManagerException' is not defined"><![CDATA[Traceback (most recent call last):
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 60, in testPartExecutor
+    yield
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 676, in run
+    self._callTestMethod(testMethod)
+  File "C:\Users\tresb\AppData\Local\Programs\Python\Python38\lib\unittest\case.py", line 633, in _callTestMethod
+    method()
+  File "c:\universidad\universidad\2\2ocuatrimestre\desarrollo de software\ejerciciosguiados\eg3\g81.t17.eg3\src\unittest\python\test_request_access_code_tests.py", line 19, in test_AM_FR_01_I1_8_caracteres
+    with self.assertRaises(AccessManagerException) as AME:
+NameError: name 'AccessManagerException' is not defined
+]]></error>
+	</testcase>
+</testsuite>
