@@ -66,7 +66,7 @@ class AccessKey:
                     list_data = json.load(file)
                     for k in list_data:
                         if k["_AccessKey__id_document"] == value.id_document:
-                            raise AccessManagementException("Clave encontrada en storageRequest")
+                            list_data.remove(k)
                     list_data.append(value.__dict__)
                 with open(my_file, "w", encoding="utf-8", newline="") as file:
                     json.dump(list_data, file, indent=2)

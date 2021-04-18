@@ -7,6 +7,7 @@ from .access_key import AccessKey
 from pathlib import Path
 from datetime import datetime
 import re
+import os
 import json
 
 
@@ -15,15 +16,17 @@ class AccessManager:
     def __init__(self):
         self.pathJson = str(Path.cwd()) + "/../../JsonFiles/"
 
-    @staticmethod
+    """"@staticmethod
     def validate_dni(dni):
-        """RETURN TRUE IF THE DNI IS RIGHT, OR FALSE IN OTHER CASE"""
-        return True
+        ""RETURN TRUE IF THE DNI IS RIGHT, OR FALSE IN OTHER CASE""
+        return True"""
+
 
     @staticmethod
-    def request_access_code(self, id_document, access_type, full_name, email_address, days):
+    def request_access_code(id_document, access_type, full_name, email_address, validity):
+
         ar = AccessRequest(id_document=id_document, full_name=full_name,
-                           access_type=access_type, email_address=email_address, validity=days)
+                           access_type=access_type, email_address=email_address, validity=validity)
         return ar.access_code
 
     def get_access_key(self, input_file):
@@ -40,68 +43,29 @@ class AccessManager:
         access_code = data["AccessCode"]
         notification_emails = data["NotificationMail"]
         value = AccessKey(dni, access_code, notification_emails, 2)
-        # ??? self.save_to_storage_key(value.key)
 
-        return value.key
+        key = value.get_access_key(input_file)
 
-    def save_to_storage_request(self, value):
-        my_file = self.pathJson + "storageRequest.json"
-        pfile = Path(my_file)
-        if pfile.is_file():
-            with open(my_file, "w", encoding="utf-8", newline="") as file:
-                list_data = self.read_file(my_file)
+        return key
 
-                for k in list_data:
-                    if k["_AccessRequest__id_document"] == value:
-                        raise AccessManagementException("DNI encontrado en storageRequest")
-
-                list_data.append(value.__dict__)
-        else:
-            with open(my_file, "x", encoding="utf-8", newline="") as file:
-                data = [value.__dict__]
-                json.dump(data, file, indent=2)
-        return
-        #my_file: str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageRequest.json"
-        try:
-            with open(my_file, "x", encoding="utf-8", newline="") as file:
-                data = [self.__dict__]
-                json.dump(data, file, indent=2)
-        except FileExistsError as ex:
-            list_data = self.read_file(my_file)
-
-            for k in list_data:
-                if k["_AccessRequest__id_document"] == value:
-                    raise AccessManagementException("DNI encontrado en storageRequest")
-            list_data.append(self.__dict__)
-            with open(my_file, "w", encoding="utf-8", newline="") as file:
-                json.dump(list_data, file, indent=2)
-
-    def save_to_storage_key(self, value):
-        my_file = self.pathJson + "storageKey.json"
-        #my_file = str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageKey.json"
-        try:
-            with open(my_file, "x", encoding="utf-8", newline="") as file:
-                data = [self.__dict__]
-                json.dump(data, file, indent="2")
-        except FileExistsError as ex:
-            list_data = self.read_file(my_file)
-
-            for k in list_data:
-                if k["_AccessRequest__id_document"] == value:
-                    raise AccessManagementException("Clave encontrada en storageRequest")
-            list_data.append(self.__dict__)
-            with open(my_file, "w", encoding="utf-8", newline="") as file:
-                json.dump(list_data, file, indent="2")
+        """def save_to_storage_key(self, value):
+        cwd = self.pathJson
+        my_file = cwd + value + ".json"
+        if os.path.exists(my_file):
+        os.remove(my_file)
+        with open(my_file, "x", encoding="utf-8", newline="") as file:
+        data = {"Key": value}
+        json.dump(data, file, indent=2)"""
 
     def open_door(self, key):
 
         self.check_key(key)
 
-        my_file = self.pathJson + "storageKey.json"
+        my_file = self.pathJson + "/storageKey.json"
         #my_file = str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageKey.json"
         list_key = self.read_file(my_file)
 
-        justnow = datetime.utcnow()
+        justnow = datetime(2021, 1, 1, 1, 1)
         justnow_timestap = datetime.timestamp(justnow)
 
         for k in list_key:

@@ -24,5 +24,47 @@
     "_AccessKey__expiration_date": 1618935985.347946,
     "pathJson": "C:\\Universidad\\Universidad\\2\\2oCuatrimestre\\Desarrollo de Software\\EjerciciosGuiados\\EG3\\G81.T17.EG3\\src\\main\\python/../../JsonFiles/",
     "_AccessKey__key": "d08ce21f3b9c2da48445507518c7e556a0e6c6fb94fd6f3ae3f8307e4705b909"
+  },
+  {
+    "_AccessKey__alg": "SHA-256",
+    "_AccessKey__type": "DS",
+    "_AccessKey__id_document": "45334984Y",
+    "_AccessKey__access_code": "d2a7ca3223cd13b9a61f0e092aaaa140",
+    "_AccessKey__notification_emails": [
+      "mail1@uc3m.es",
+      "mail2@uc3m.es"
+    ],
+    "_AccessKey__issued_at": 1618769942.385545,
+    "_AccessKey__expiration_date": 8942742.385545,
+    "pathJson": "C:\\Users\\migue\\PycharmProjects\\G81.T17.EG3\\src\\unittest\\python/../../JsonFiles/",
+    "_AccessKey__key": "1d637b7964889b2dd952e9858805dd6a4e0a02d60a3ebdb9dcf7b3c494743625"
+  },
+  {
+    "_AccessKey__alg": "SHA-256",
+    "_AccessKey__type": "DS",
+    "_AccessKey__id_document": "43935158C",
+    "_AccessKey__access_code": "d2a7ca3223cd13b9a61f0e092aaaa140",
+    "_AccessKey__notification_emails": [
+      "mail1@uc3m.es",
+      "mail2@uc3m.es"
+    ],
+    "_AccessKey__issued_at": 1609459260.0,
+    "_AccessKey__expiration_date": 0.0,
+    "pathJson": "C:\\Users\\migue\\PycharmProjects\\G81.T17.EG3\\src\\unittest\\python/../../JsonFiles/",
+    "_AccessKey__key": "4612e8c1d700d1268481a80600bb19d1529e158de6a7e77e00afd77297337596"
+  },
+  {
+    "_AccessKey__alg": "SHA-256",
+    "_AccessKey__type": "DS",
+    "_AccessKey__id_document": "53935158C",
+    "_AccessKey__access_code": "d2a7ca3223cd13b9a61f0e092aaaa140",
+    "_AccessKey__notification_emails": [
+      "mail1@uc3m.es",
+      "mail2@uc3m.es"
+    ],
+    "_AccessKey__issued_at": 1609459260.0,
+    "_AccessKey__expiration_date": 1609632060.0,
+    "pathJson": "C:\\Users\\migue\\PycharmProjects\\G81.T17.EG3\\src\\unittest\\python/../../JsonFiles/",
+    "_AccessKey__key": "5612e8c1d700d1268481a80600bb19d1529e158de6a7e77e00afd77297337596"
   }
 ]

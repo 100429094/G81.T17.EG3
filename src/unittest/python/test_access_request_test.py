@@ -2,18 +2,21 @@ from unittest import TestCase
 import unittest
 from src.main.python.secure_all.access_request import AccessRequest
 from src.main.python.secure_all.access_management_exception import AccessManagementException
+from src.main.python.secure_all.access_manager import  AccessManager
 
 
 class TestAccessRequest(TestCase):
 
     def test_AM_FR_01_I1_dni_valido(self):
-        ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
-                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(ar.access_code, "299350376deadf07044aaa5035f93a6f")
+        ar = AccessManager()
+        ac = ar.request_access_code(id_document="12345678Z", full_name="Beatriz Benitez",
+                                    access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
+        self.assertEqual(ac, "299350376deadf07044aaa5035f93a6f")
 
     def test_AM_FR_01_I1_8_caracteres(self):
         with self.assertRaises(AccessManagementException) as AME:
-            AccessRequest(id_document="1234567Z", full_name="Beatriz Benitez",
+            ar = AccessManager
+            ar.request_access_code(id_document="1234567Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
         self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
@@ -48,9 +51,10 @@ class TestAccessRequest(TestCase):
         self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I2_resident(self):
-        ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
+        ar = AccessManager()
+        ac = ar.request_access_code(id_document="12345678Z", full_name="Beatriz Benitez",
                            access_type="Resident", email_address="100429094@alumnos.uc3m.es", validity=0)
-        self.assertEqual(ar.access_code, "eeadab980b4ae41412aed7a991750fab")
+        self.assertEqual(ac, "eeadab980b4ae41412aed7a991750fab")
 
     def test_AM_FR_01_I2_guest(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
