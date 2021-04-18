@@ -1,6 +1,7 @@
 """Module 3"""
 import os
 
+from . import AccessRequest
 from .access_management_exception import AccessManagementException
 from .access_key import AccessKey
 from pathlib import Path
@@ -14,15 +15,16 @@ class AccessManager:
     def __init__(self):
         self.pathJson = str(Path.cwd()) + "/../../JsonFiles/"
 
-
     @staticmethod
     def validate_dni(dni):
         """RETURN TRUE IF THE DNI IS RIGHT, OR FALSE IN OTHER CASE"""
         return True
 
-    def request_access_code(self, id_document, access_type, full_name, days):
-        pass
-
+    @staticmethod
+    def request_access_code(self, id_document, access_type, full_name, email_address, days):
+        ar = AccessRequest(id_document=id_document, full_name=full_name,
+                           access_type=access_type, email_address=email_address, validity=days)
+        return ar.access_code
 
     def get_access_key(self, input_file):
         try:
@@ -58,8 +60,6 @@ class AccessManager:
             with open(my_file, "x", encoding="utf-8", newline="") as file:
                 data = [value.__dict__]
                 json.dump(data, file, indent=2)
-
-
         return
         #my_file: str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageRequest.json"
         try:

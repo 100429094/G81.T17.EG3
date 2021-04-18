@@ -15,37 +15,37 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="1234567Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I1_10_caracteres(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="123456789Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I1_0_letras(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="123456789", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I1_2_letras(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="1234567AA", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I1_type(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document=132.23, full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I1_letra_invalida(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678D", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El DNI recibido no es valido o no tiene un formato valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_DNI)
 
     def test_AM_FR_01_I2_resident(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
@@ -61,7 +61,7 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Other", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El tipo de acceso solicitado no es valido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_ACCESS_TYPE)
 
     def test_AM_FR_01_I3_nombre_apellido(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
@@ -76,31 +76,31 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_NAME)
 
     def test_AM_FR_01_I3_nombres_apellidos(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz x Benitez Blazquez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_NAME)
 
     def test_AM_FR_01_I3_espacio_delante(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name=" Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_NAME)
 
     def test_AM_FR_01_I3_espacio_detras(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez ",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_NAME)
 
     def test_AM_FR_01_I3_masdeunespacio(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz     Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: La cadena de nombre y apellido no es válida")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_NAME)
 
     def test_AM_FR_01_I4_email_valido(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
@@ -111,49 +111,49 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_sin_nombre(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="@alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_sin_arroba(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094alumnos.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_sin_company(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_sin_punto(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnoses", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_sin_com(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I4_email_caracter_invalido(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alum!os.uc3m.es", validity=3)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El formato de correo electrónico no es válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_EMAIL)
 
     def test_AM_FR_01_I5_validity_guest_1(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=1)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El número de días no tiene un valor válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_VALIDITY)
 
     def test_AM_FR_01_I5_validity_guest_2(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
@@ -179,7 +179,7 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Guest", email_address="100429094@alumnos.uc3m.es", validity=16)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El número de días no tiene un valor válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_VALIDITY)
 
     def test_AM_FR_01_I5_validity_resident_0(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
@@ -190,13 +190,13 @@ class TestAccessRequest(TestCase):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Resident", email_address="100429094@alumnos.uc3m.es", validity=1)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El número de días no tiene un valor válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_VALIDITY)
 
     def test_AM_FR_01_I5_validity_resident_2(self):
         with self.assertRaises(AccessManagementException) as AME:
             AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",
                           access_type="Resident", email_address="100429094@alumnos.uc3m.es", validity=2)
-        self.assertEqual(AME.exception.message, "EXCEPTION: El número de días no tiene un valor válido")
+        self.assertEqual(AME.exception.message, AccessRequest.MENSAJE_EXCEPCION_VALIDITY)
 
     def test_AM_FR_01_O1_valido(self):
         ar = AccessRequest(id_document="12345678Z", full_name="Beatriz Benitez",

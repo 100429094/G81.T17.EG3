@@ -1,7 +1,7 @@
-[
-  {
-    "AccessCode": "299350376deadf07044aaa5035f93a6f",
-    "DNI": "12345678Z",
-    "NotificationMail": "100429094@alumnos.uc3m.es"
-  }
-]
+{
+  "AccessCode": "299350376deadf07044aaa5035f93a6f",
+  "DNI": "12345678Z",
+  "NotificationMail": [
+    "100429094@alumnos.uc3m.es"
+  ]
+}
