@@ -1,8 +1,11 @@
 """Contains the class Access Key"""
+import json
+import os
 from datetime import datetime
 import hashlib
 import sys
 import re
+from pathlib import Path
 from .access_management_exception import AccessManagementException
 
 
@@ -10,6 +13,7 @@ class AccessKey:
     """Class representing the key for accessing the building"""
 
     def __init__(self, dni, access_code, notification_emails, validity):
+        self.pathJson = str(Path.cwd()) + "/../../JsonFiles/"
         self.__alg = "SHA-256"
         self.__type = "DS"
         self.id_document = dni
@@ -25,6 +29,46 @@ class AccessKey:
             """timestamp is represneted in seconds.microseconds
             validity must be expressed in senconds to be added to the timestap"""
             self.__expiration_date = self.__issued_at + (validity * 24 * 60 * 60)
+
+    def get_access_key(self, input_file):
+        try:
+            with open(input_file, "r", encoding="utf-8", newline="") as file:
+                data = json.load(file)
+        except FileNotFoundError as ex:
+            raise AccessManagementException("Archivo o ruta del archivo incorrecta") from ex
+        except json.JSONDecodeError as ex:
+            raise AccessManagementException("JSON Decode Error - Formato Json incorrecto") from ex
+        if "DNI" not in data or "AccessCode" not in data or "NotificationMail" not in data:
+            raise AccessManagementException("Etiqueta incorrecta")
+        dni = data["DNI"]
+        access_code = data["AccessCode"]
+        notification_emails = data["NotificationMail"]
+        value = AccessKey(dni, access_code, notification_emails, 2)
+
+        if access_code != self.access_code:
+            raise AccessManagementException("Access code erróneo")
+
+        self.save_to_storage_key(value.key)
+
+        return value.key
+
+    def save_to_storage_key(self, value):
+        my_file = self.pathJson + "storageKey.json"
+        if os.path.exists(my_file):
+            if os.stat(my_file).st_size == 0:
+                os.remove(my_file)
+                with open(my_file, "x", encoding="utf-8", newline="") as file:
+                    list_data = self.__signature_string()
+                    json.dump(list_data, file, indent=2)
+            else:
+                with open(my_file, "w", encoding="utf-8", newline="") as file:
+                    list_data = json.load(file)
+                    list_data.append(self.__signature_string())
+                    json.dump(list_data, file, indent=2)
+        else:
+            with open(my_file, "x", encoding="utf-8", newline="") as file:
+                list_data = self.__signature_string()
+                json.dump(list_data, file, indent=2)
 
     def __signature_string(self):
         """Composes the string to be used for generating the key"""
