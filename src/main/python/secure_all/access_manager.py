@@ -70,7 +70,7 @@ class AccessManager:
 
         for k in list_key:
             if k["_AccessKey__key"] == key and (k["_AccessKey__expiration_date"] > justnow_timestap
-                                                or k["_AccessKey__expiration_date"] == 0):
+                                                or k["_AccessKey__expiration_date"] == "0"):
                 return True
         raise AccessManagementException("Clave no encontrada o ha expirado")
 

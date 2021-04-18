@@ -49,7 +49,7 @@
       "mail2@uc3m.es"
     ],
     "_AccessKey__issued_at": 1609459260.0,
-    "_AccessKey__expiration_date": 0.0,
+    "_AccessKey__expiration_date": 0,
     "pathJson": "C:\\Users\\migue\\PycharmProjects\\G81.T17.EG3\\src\\unittest\\python/../../JsonFiles/",
     "_AccessKey__key": "4612e8c1d700d1268481a80600bb19d1529e158de6a7e77e00afd77297337596"
   },
