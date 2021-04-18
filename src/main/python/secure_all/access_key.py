@@ -13,7 +13,6 @@ class AccessKey:
     """Class representing the key for accessing the building"""
 
     def __init__(self, dni, access_code, notification_emails, validity):
-        self.pathJson = str(Path.cwd()) + "/../../JsonFiles/"
         self.__alg = "SHA-256"
         self.__type = "DS"
         self.id_document = dni
@@ -29,6 +28,7 @@ class AccessKey:
             """timestamp is represneted in seconds.microseconds
             validity must be expressed in senconds to be added to the timestap"""
             self.__expiration_date = self.__issued_at + (validity * 24 * 60 * 60)
+        self.pathJson = str(Path.cwd()) + "/../../JsonFiles/"
 
     def get_access_key(self, input_file):
         try:
@@ -44,11 +44,12 @@ class AccessKey:
         access_code = data["AccessCode"]
         notification_emails = data["NotificationMail"]
         value = AccessKey(dni, access_code, notification_emails, 2)
+        value.__key = value.key
 
         if access_code != self.access_code:
             raise AccessManagementException("Access code erróneo")
 
-        self.save_to_storage_key(value.key)
+        self.save_to_storage_key(value)
 
         return value.key
 
@@ -58,16 +59,20 @@ class AccessKey:
             if os.stat(my_file).st_size == 0:
                 os.remove(my_file)
                 with open(my_file, "x", encoding="utf-8", newline="") as file:
-                    list_data = self.__signature_string()
+                    list_data = [value.__dict__]
                     json.dump(list_data, file, indent=2)
             else:
-                with open(my_file, "w", encoding="utf-8", newline="") as file:
+                with open(my_file, "r", encoding="utf-8", newline="") as file:
                     list_data = json.load(file)
-                    list_data.append(self.__signature_string())
+                    for k in list_data:
+                        if k["_AccessKey__id_document"] == value.id_document:
+                            raise AccessManagementException("Clave encontrada en storageRequest")
+                    list_data.append(value.__dict__)
+                with open(my_file, "w", encoding="utf-8", newline="") as file:
                     json.dump(list_data, file, indent=2)
         else:
             with open(my_file, "x", encoding="utf-8", newline="") as file:
-                list_data = self.__signature_string()
+                list_data = [value.__dict__]
                 json.dump(list_data, file, indent=2)
 
     def __signature_string(self):

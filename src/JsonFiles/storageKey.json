@@ -1,0 +1,28 @@
+[
+  {
+    "_AccessKey__alg": "SHA-256",
+    "_AccessKey__type": "DS",
+    "_AccessKey__id_document": "12345678Z",
+    "_AccessKey__access_code": "299350376deadf07044aaa5035f93a6f",
+    "_AccessKey__notification_emails": [
+      "100429094@alumnos.uc3m.es"
+    ],
+    "_AccessKey__issued_at": 1618763185.34695,
+    "_AccessKey__expiration_date": 1618935985.34695,
+    "pathJson": "C:\\Universidad\\Universidad\\2\\2oCuatrimestre\\Desarrollo de Software\\EjerciciosGuiados\\EG3\\G81.T17.EG3\\src\\main\\python/../../JsonFiles/",
+    "_AccessKey__key": "821c9d9cf4ab2255fd53a8365042a12f49f183e82b811f8ae2dc3ebe941b3bb4"
+  },
+  {
+    "_AccessKey__alg": "SHA-256",
+    "_AccessKey__type": "DS",
+    "_AccessKey__id_document": "11111111H",
+    "_AccessKey__access_code": "d382a416259e01cbd63b75792036025d",
+    "_AccessKey__notification_emails": [
+      "100429094@alumnos.uc3m.es"
+    ],
+    "_AccessKey__issued_at": 1618763185.347946,
+    "_AccessKey__expiration_date": 1618935985.347946,
+    "pathJson": "C:\\Universidad\\Universidad\\2\\2oCuatrimestre\\Desarrollo de Software\\EjerciciosGuiados\\EG3\\G81.T17.EG3\\src\\main\\python/../../JsonFiles/",
+    "_AccessKey__key": "d08ce21f3b9c2da48445507518c7e556a0e6c6fb94fd6f3ae3f8307e4705b909"
+  }
+]

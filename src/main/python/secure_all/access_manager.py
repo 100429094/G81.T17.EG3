@@ -101,14 +101,14 @@ class AccessManager:
         #my_file = str(Path.home()) + "/PycharmProjects/G81.T17.EG3/src/JsonFiles/storageKey.json"
         list_key = self.read_file(my_file)
 
-        justnow_timestap = datetime.timestamp()
+        justnow = datetime.utcnow()
+        justnow_timestap = datetime.timestamp(justnow)
 
         for k in list_key:
-
             if k["_AccessKey__key"] == key and (k["_AccessKey__expiration_date"] > justnow_timestap
                                                 or k["_AccessKey__expiration_date"] == 0):
                 return True
-            raise AccessManagementException("Clave no encontrada o ha expirado")
+        raise AccessManagementException("Clave no encontrada o ha expirado")
 
     def check_key(self, key):
         regex = '[0-9a-f]{64}'

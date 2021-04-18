@@ -1,7 +1,7 @@
 from secure_all import AccessManager, AccessRequest, AccessKey
 from pathlib import Path
 
-""""""
+
 def main():
     cwd = str(Path.cwd()) + "/../../../JsonFilesRequests/"
     my_file = cwd + "12345678Z.json"
@@ -14,8 +14,7 @@ def main():
                    notification_emails=["100429094@alumnos.uc3m.es"], validity=3)
     ak.get_access_key(my_file)
 
-
-
+    return
 
 
     am = AccessManager()
@@ -27,17 +26,6 @@ def main():
                             access_type="Guest", email_address="100429094@alumnos.uc3m.es", days=3)
 
 
-
-
-    cwd = str(Path.cwd()) + "/../../../JsonFilesRequests/"
-    my_file = cwd + "11111111H.json"
-    ak = AccessKey(dni="11111111H", access_code="d382a416259e01cbd63b75792036025d",
-                   notification_emails=["100429094@alumnos.uc3m.es"], validity=3)
-    ak.get_access_key(my_file)
-
-
-
 if __name__ == "__main__":
     main()
 
-""""""
